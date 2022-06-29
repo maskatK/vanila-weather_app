@@ -33,8 +33,21 @@ iconElement.setAttribute(
     "alt", response.data.weather[0].description);
 }
 
-let apiKey="d14a5f9f0440a82a056dfd79e5c778de";
-let city = "Kiev"
-let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+function search(city) {
+    let apiKey="d14a5f9f0440a82a056dfd79e5c778de";
+    let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displeyTemperature);
+}
 
-axios.get(apiUrl).then(displeyTemperature);
+function hendleSubmit(event) {
+    event.preventDefault();
+    let cityInputElement = document.querySelector("#city-input");
+    search(cityInputElement.value);
+    console.log(cityInputElement.value);
+}
+
+search("New York");
+
+
+let form = document.querySelector("#serch-form");
+form.addEventListener("submit", hendleSubmit);
